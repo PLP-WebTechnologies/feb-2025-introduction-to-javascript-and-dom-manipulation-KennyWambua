@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Advanced HTML5 Elements and Forms</title>
+    <style>
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        max-width: 1280px;
+      }
+
+      body {
+        font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+        margin: 0 auto;
+        line-height: 1.6;
+        color: #2c3e50;
+        background-color: #f5f6fa;
+      }
+
+      /* Header styles */
+      header {
+        padding: 1rem 0.75rem;
+        background-color: #2c3e50;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        color: white;
+        padding-right: 4rem;
+        margin-bottom: 2rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+      }
+
+      header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        letter-spacing: 1px;
+      }
+
+      nav ul {
+        display: flex;
+        list-style: none;
+        gap: 2rem;
+      }
+
+      nav a {
+        color: white;
+        text-decoration: none;
+        font-weight: 500;
+        transition: color 0.3s ease;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+      }
+
+      nav a:hover {
+        color: #3498db;
+        background-color: rgba(255, 255, 255, 0.1);
+      }
+
+      /* Main content styles */
+      main {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+        padding: 0 0.75rem;
+        max-width: 1280px;
+        margin: 0 auto;
+      }
+
+      #information-section {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1.5rem;
+      }
+
+      .featured-players-div,
+      .registration-form-div {
+        background-color: white;
+        padding: 2rem;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      .featured-players-div:hover,
+      .registration-form-div:hover {
+        transform: translateY(-5px);
+      }
+
+      h2 {
+        color: #2c3e50;
+        margin-bottom: 1.5rem;
+        font-size: 1.8rem;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 0.5rem;
+      }
+
+      h3 {
+        color: #34495e;
+        margin: 1rem 0;
+        font-size: 1.3rem;
+      }
+
+      /* Form styles */
+      .form-group {
+        margin-bottom: 1.5rem;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+        color: #2c3e50;
+      }
+
+      input[type="text"],
+      input[type="email"],
+      input[type="password"],
+      input[type="date"],
+      select {
+        width: 100%;
+        padding: 0.8rem;
+        border: 2px solid #e0e0e0;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
+      }
+
+      input[type="text"]:focus,
+      input[type="email"]:focus,
+      input[type="password"]:focus,
+      input[type="date"]:focus,
+      select:focus {
+        border-color: #3498db;
+        outline: none;
+        box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+      }
+
+      .radio-group,
+      .checkbox-group {
+        margin: 1rem 0;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+
+      .radio-group label,
+      .checkbox-group label {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 1rem;
+        cursor: pointer;
+      }
+
+      input[type="radio"],
+      input[type="checkbox"] {
+        margin-right: 0.5rem;
+        cursor: pointer;
+      }
+
+      button {
+        background-color: #3498db;
+        color: white;
+        padding: 1rem 2rem;
+        border: none;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1rem;
+        font-weight: 600;
+        transition: all 0.3s ease;
+        width: 100%;
+      }
+
+      button:hover {
+        background-color: #2980b9;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Image section */
+      section:first-child {
+        text-align: center;
+        padding: 2rem;
+      }
+
+      section:first-child img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        transition: transform 0.3s ease;
+      }
+
+      section:first-child img:hover {
+        transform: scale(1.02);
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .information-section {
+          grid-template-columns: 1fr;
+        }
+
+        header {
+          flex-direction: column;
+          padding: 1rem;
+          text-align: center;
+        }
+
+        nav ul {
+          margin-top: 1rem;
+          gap: 1rem;
+        }
+
+        h2 {
+          font-size: 1.5rem;
+        }
+
+        .featured-players-div,
+        .registration-form-div {
+          padding: 1.5rem;
+        }
+      }
+
+      @media (max-width: 480px) {
+        nav ul {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+
+        .radio-group,
+        .checkbox-group {
+          flex-direction: column;
+          gap: 0.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <h1>Apex Legends</h1>
+      <nav>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main>
+      <section>
+        <h2>Apex legend Image</h2>
+        <img
+          src="https://images.pexels.com/photos/10547072/pexels-photo-10547072.jpeg?auto=compress&cs=tinysrgb&w=400"
+          alt="Apex Legends character"
+        />
+      </section>
+      <section id="information-section">
+        <!-- Featured Players Section -->
+        <div class="featured-players-div">
+          <h2>Featured Players</h2>
+          <ul>
+            <li>
+              <h3>Player 1: WraithMaster</h3>
+              <p>Rank: Diamond | Favorite Legend: Wraith</p>
+            </li>
+            <li>
+              <h3>Player 2: PathfinderPro</h3>
+              <p>Rank: Platinum | Favorite Legend: Pathfinder</p>
+            </li>
+            <li>
+              <h3>Player 3: LifelineHero</h3>
+              <p>Rank: Gold | Favorite Legend: Lifeline</p>
+            </li>
+          </ul>
+        </div>
+
+        <!-- Registration Form Section -->
+        <div class="registration-form-div">
+          <h2>Registration Form</h2>
+          <form id="registrationForm">
+            <!-- Basic Information -->
+            <div class="form-group">
+              <label for="name">Full Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                placeholder="Enter your full name"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="email">Email Address *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                placeholder="Enter your email"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="password">Password *</label>
+              <input
+                type="password"
+                id="password"
+                name="password"
+                required
+                minlength="8"
+                placeholder="Minimum 8 characters"
+              />
+            </div>
+
+            <div class="form-group">
+              <label for="dob">Date of Birth *</label>
+              <input type="date" id="dob" name="dob" required />
+            </div>
+
+            <!-- Platform Selection -->
+            <div class="form-group">
+              <label for="platform">Preferred Platform *</label>
+              <select id="platform" name="platform" required>
+                <option value="">Select your platform</option>
+                <option value="pc">PC</option>
+                <option value="ps4">PlayStation 4</option>
+                <option value="xbox">Xbox One</option>
+                <option value="switch">Nintendo Switch</option>
+              </select>
+            </div>
+
+            <!-- Experience Level -->
+            <div class="form-group">
+              <label>Experience Level *</label>
+              <div class="radio-group">
+                <input
+                  type="radio"
+                  id="beginner"
+                  name="experience"
+                  value="beginner"
+                  required
+                />
+                <label for="beginner">Beginner</label>
+
+                <input
+                  type="radio"
+                  id="intermediate"
+                  name="experience"
+                  value="intermediate"
+                />
+                <label for="intermediate">Intermediate</label>
+
+                <input
+                  type="radio"
+                  id="expert"
+                  name="experience"
+                  value="expert"
+                />
+                <label for="expert">Expert</label>
+              </div>
+            </div>
+
+            <!-- Preferences -->
+            <div class="form-group">
+              <label>Game Preferences</label>
+              <div class="checkbox-group">
+                <input
+                  type="checkbox"
+                  id="solo"
+                  name="preferences"
+                  value="solo"
+                />
+                <label for="solo">Solo Play</label>
+
+                <input
+                  type="checkbox"
+                  id="duo"
+                  name="preferences"
+                  value="duo"
+                />
+                <label for="duo">Duo Play</label>
+
+                <input
+                  type="checkbox"
+                  id="squad"
+                  name="preferences"
+                  value="squad"
+                />
+                <label for="squad">Squad Play</label>
+              </div>
+            </div>
+
+            <button type="submit">Register</button>
+          </form>
+        </div>
+      </section>
+    </main>
+    <script src="script.js"></script>
+  </body>
+</html>
